@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,13 @@ namespace ContextMenuRegister
     {
         static void Main(string[] args)
         {
-            Register.RegisterKey("复制文件路径", "test.exe");
+            NameValueCollection commands = ConfigUtil.ExtractConfig();
+            foreach(string commandName in ConfigUtil.ExtractConfig())
+            {
+                Register.RegisterKey(commandName, commands.Get(commandName));
+            }
+            Console.WriteLine("按任意键结束程序");
+            Console.ReadKey();
         }
     }
 }

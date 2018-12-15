@@ -53,8 +53,6 @@ namespace ContextMenuRegister
                 if (workerKey != null) workerKey.Close();
                 if (shellKey != null) shellKey.Close();
             }
-            Console.WriteLine("输入任意键退出");
-            Console.ReadKey();
         }
     }
 }

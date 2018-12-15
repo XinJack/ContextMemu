@@ -43,8 +43,7 @@ namespace ContextMenuRegister
                     workerKey.SetValue("MultiSelectModel", "Single");
                     commandKey = workerKey.CreateSubKey("command");
                     string workerPath = Path.Combine(System.Environment.CurrentDirectory, DEFAULT_WORKER_DIRECTORY, workerName);
-                    Console.WriteLine(workerPath);
-                    commandKey.SetValue(string.Empty, string.Format("\"{0}\" \"%1\"", workerPath));
+                    commandKey.SetValue(string.Empty, string.Format("\"{0}\" \"%1\" \"{1}\"", workerPath, commandName));
                     Console.WriteLine(string.Format("添加右键菜单命令[{0}]成功", commandName));
                 }
             }

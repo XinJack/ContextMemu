@@ -20,17 +20,17 @@ namespace ContextMenuRegister
         /// </summary>
         /// <param name="commandName">命令名</param>
         /// <param name="workerPath">处理程序路径</param>
-        public static void RegisterKey(string commandName, string workerName)
+        public static void RegisterKey(string registryPath, string commandName, string workerName)
         {
             RegistryKey shellKey = null;
             RegistryKey workerKey = null;
             RegistryKey commandKey = null;
             try
             {
-                shellKey = Registry.ClassesRoot.OpenSubKey(@"*\shell", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.FullControl);
+                shellKey = Registry.ClassesRoot.OpenSubKey(registryPath, RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.FullControl);
                 if (shellKey == null)
                 {
-                    shellKey = Registry.ClassesRoot.CreateSubKey(@"*\shell");
+                    shellKey = Registry.ClassesRoot.CreateSubKey(registryPath);
                 }
                 workerKey = shellKey.OpenSubKey(commandName);
                 if(workerKey != null)

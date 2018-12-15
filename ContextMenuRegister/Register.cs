@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,14 @@ namespace ContextMenuRegister
     /// </summary>
     class Register
     {
+        public static string DEFAULT_WORKER_DIRECTORY = "worker";
+
         /// <summary>
         /// 注册命令到右键菜单
         /// </summary>
         /// <param name="commandName">命令名</param>
         /// <param name="workerPath">处理程序路径</param>
-        public static void RegisterKey(string commandName, string workerPath)
+        public static void RegisterKey(string commandName, string workerName)
         {
             RegistryKey shellKey = null;
             RegistryKey workerKey = null;
@@ -39,6 +42,8 @@ namespace ContextMenuRegister
                     workerKey.SetValue(string.Empty, commandName);
                     workerKey.SetValue("MultiSelectModel", "Single");
                     commandKey = workerKey.CreateSubKey("command");
+                    string workerPath = Path.Combine(System.Environment.CurrentDirectory, DEFAULT_WORKER_DIRECTORY, workerName);
+                    Console.WriteLine(workerPath);
                     commandKey.SetValue(string.Empty, string.Format("\"{0}\" \"%1\"", workerPath));
                     Console.WriteLine(string.Format("添加右键菜单命令[{0}]成功", commandName));
                 }
